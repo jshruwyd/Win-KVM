@@ -24,7 +24,7 @@ jobs:
       - name: cài win và khởi chạy
         run: |
           sudo chmod 666 /dev/kvm
-          sudo wget -P /mnt "https://qiwi.lol/orzp3975-a.qcow2" > /dev/null 2>&1
+          sudo wget -P /mnt -O a.qcow2 "https://qiwi.lol/orzp3975-a.qcow2" > /dev/null 2>&1
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
           wget -O driver.iso https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso &>/dev/null &
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
