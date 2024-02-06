@@ -32,7 +32,7 @@ jobs:
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
           echo "Tai driver virtio"
           wget -O driver.iso https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso &>/dev/null &
-          "Xong"
+          echo "Xong"
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
           echo "thanh cong"
           echo "Day la ip vnc"
