@@ -2,12 +2,8 @@ name: Windows 11 (8gb ram / 60gb ssd / 3core / VT-x support)
 
 on: 
   workflow_dispatch:
-    inputs:
-      ngrok:
-        description: 'ngrok auth token'
-        required: true
-     
- 
+      inputs:
+            ngrok:
 jobs:
   build:
     runs-on: ubuntu-latest
