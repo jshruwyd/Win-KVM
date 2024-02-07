@@ -23,7 +23,7 @@ jobs:
           echo "Dang tai file windows 1-5 phut"
           sudo wget -O a.VHD "https://qiwi.lol/fUVC1777-Windows7Enterprise.VHD" > /dev/null 2>&1
           echo "Da xong, dang copy file"
-          sudo cp a.qcow2 /mnt
+          sudo cp a.VHD /mnt
           echo "Xong"
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
           echo "Tai driver virtio"
