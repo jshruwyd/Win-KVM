@@ -17,13 +17,13 @@ jobs:
           chmod +x ngrok
           ./ngrok config add-authtoken "${{ github.event.inputs.ngrok }}"
           nohup ./ngrok tcp --region ap 5900 &>/dev/null &
-      - name: Tải file Windows 10 LTSB x64 và chạy
+      - name: Tải file Windows 2012 R2 và chạy
         run: |
           sudo chmod 666 /dev/kvm
           echo "Dang tai file windows 1-5 phut"
           sudo wget -O a.vhd "https://download.microsoft.com/download/5/8/1/58147EF7-5E3C-4107-B7FE-F296B05F435F/9600.16415.amd64fre.winblue_refresh.130928-2229_server_serverdatacentereval_en-us.vhd" > /dev/null 2>&1
           echo "Da xong, dang copy file"
-          sudo cp a.qcow2 /mnt
+          sudo cp a.vhd /mnt
           echo "Xong"
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
           echo "Tai driver virtio"
