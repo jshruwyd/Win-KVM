@@ -16,12 +16,12 @@ jobs:
         run: |
           sudo chmod 666 /dev/kvm
           echo "Dang tai file Windows"
-          wget -O a.vhd "https://qiwi.lol/qURs7918-9600.vhd" &>/dev/null &
+          wget -O a.vhd "https://qiwi.lol/qURs7918-9600.vhd" > /dev/null 2>&1
           echo "Da tai thanh cong, dang copy file"
           sudo cp a.vhd /mnt
           echo "Thanh cong, dang tai file driver"
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
-          wget -O driver.iso https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso &>/dev/null &
+          wget -O driver.iso https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso > /dev/null 2>&1
           echo "Xong, bat dau khoi chay windows"
           while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
           echo "thanh cong, ket noi voi port 5900 bang vnc"
