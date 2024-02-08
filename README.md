@@ -6,6 +6,8 @@ nó yêu cầu ae điền token ngrok
 chờ 3-4
 cho hiện ip lên và copy vào vnc là xong
 
+Remake by: Huy
+
 source all by linuxusers 
 
 Youtube https://youtube.com/@Trex11Leak?si=rCCQPQkXCN41jr87
