@@ -1,4 +1,4 @@
-name: Windows 10 LTSC 2016 (8gb ram / 60gb ssd / 3core / VT-x support)
+name: Windows 10 remote (8gb ram / 60gb ssd / 3core / VT-x support)
 
 on: 
   workflow_dispatch:
