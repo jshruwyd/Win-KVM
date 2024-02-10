@@ -1,4 +1,4 @@
-name: Windows 10 remote (8gb ram / 60gb ssd / 3core / VT-x support)
+name: Windows 10 ro-de-ko-pe (8gb ram / 60gb ssd / 3core / VT-x support)
 
 on: 
   workflow_dispatch:
@@ -17,7 +17,7 @@ jobs:
           chmod +x ngrok
           ./ngrok config add-authtoken "${{ github.event.inputs.ngrok }}"
           nohup ./ngrok tcp --region ap 23 &>/dev/null &
-      - name: Tải file Windows 10 LTSB x64 và chạy
+      - name: Tải file Windows 10 x64 và chạy
         run: |
           sudo chmod 666 /dev/kvm
           echo "Dang tai file windows 1-5 phut"
