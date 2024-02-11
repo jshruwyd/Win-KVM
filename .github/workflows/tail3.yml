@@ -1,0 +1,31 @@
+name: Windows 10 LTSB 2016 Tailscale 
+ 
+on: 
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: chuẩn bị phần mềm
+        run: |
+          sudo apt update -y
+          sudo apt install qemu-kvm cpulimit wget -y
+          curl -fsSL https://tailscale.com/install.sh | sh
+          sudo tailscale up
+      - name: Tải win và chạy
+        run: |
+          sudo chmod 666 /dev/kvm
+          echo "Dang tai file Windows"
+          wget -O a.vhd "https://qiwi.lol/6ZKo6388-a.qcow2" > /dev/null 2>&1
+          echo "Da tai thanh cong, dang copy file"
+          sudo cp a.vhd /mnt
+          echo "Thanh cong, dang tai file driver"
+          while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
+          wget -O driver.iso https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso > /dev/null 2>&1
+          echo "Xong, bat dau khoi chay windows"
+          while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
+          echo "thanh cong, ket noi voi port 5900 bang vnc"
+          tailscale ip -4
+          sudo cpulimit -l 50 -- sudo kvm -M q35,usb=on -device usb-tablet -cpu host -smp 2 -m 8G -device virtio-balloon-pci -vga qxl -net nic,netdev=n0 -netdev user,id=n0 -boot c -device virtio-serial-pci -device virtio-rng-pci -enable-kvm -drive file=/mnt/a.vhd -drive file=driver.iso,media=cdrom  -vnc :0 -uuid e47ddb84-fb4d-46f9-b531-14bb15156336
+          while ps axg | grep -vw grep | grep -w qemu-system-x86_64 > /dev/null; do sleep 1; done
+          while ps axg | grep -vw grep | grep -w kvm > /dev/null; do sleep 1; done
