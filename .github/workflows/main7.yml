@@ -1,1 +1,34 @@
-
+name: Windows 11 Canary TailScale And NGROK
+ 
+on: 
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: chuẩn bị phần mềm
+        run: |
+          sudo apt update -y
+          sudo apt install qemu-kvm cpulimit wget -y
+          curl -fsSL https://tailscale.com/install.sh | sh
+          sudo tailscale up
+      - name: Tải win và chạy
+        run: |
+          sudo chmod 666 /dev/kvm
+          echo "Dang tai file Windows"
+          sudo qemu-img create -f qcow2 /mnt/b.qcow2 100G
+          wget -O a.qcow2 "https://qiwi.lol/wZ7a6873-windows12leakednowgg.qcow2" > /dev/null 2>&1
+          echo "Da tai thanh cong, dang copy file"
+          sudo cp a.qcow2 /mnt
+          echo "Thanh cong, dang tai file driver"
+          while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
+          wget -O driver.iso https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/archive-virtio/virtio-win-0.1.240-1/virtio-win-0.1.240.iso > /dev/null 2>&1
+          echo "Xong, bat dau khoi chay windows"
+          while ps axg | grep -vw grep | grep -w wget > /dev/null; do sleep 1; done
+          echo "thanh cong, ket noi voi port 3389 hoac 5900"
+          echo "user: VM"
+          echo "pass: 1"
+          tailscale ip -4
+          sudo cpulimit -l 60 -- sudo kvm -M q35,usb=on -device usb-tablet -cpu host -smp 2,cores=2 -bios /usr/share/ovmf/OVMF.fd -m 8G -device virtio-balloon-pci -vga qxl -net nic,netdev=n0 -netdev user,id=n0,hostfwd=tcp::23-:3389 -boot c -device virtio-serial-pci -device virtio-rng-pci -enable-kvm -drive file=/mnt/a.qcow2 -vnc :0 -drive file=/mnt/b.qcow2 
+          while ps axg | grep -vw grep | grep -w qemu-system-x86_64 > /dev/null; do sleep 1; done
+          while ps axg | grep -vw grep | grep -w kvm > /dev/null; do sleep 1; done
