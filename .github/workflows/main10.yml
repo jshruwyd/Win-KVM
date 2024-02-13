@@ -31,6 +31,6 @@ jobs:
           echo "VNC: 5900"
           echo "RDP: 23"
           tailscale ip -4
-          sudo cpulimit -l 60 -- sudo kvm -M q35,usb=on -device usb-tablet -cpu host -smp 2,cores=2 -bios /usr/share/ovmf/OVMF.fd -m 8G -device virtio-balloon-pci -vga qxl -net nic,netdev=n0 -netdev user,id=n0,hostfwd=tcp::23-:3389 -boot c -device virtio-serial-pci -device virtio-rng-pci -enable-kvm -drive file=/mnt/a.qcow2 -vnc :0 -drive file=/mnt/b.qcow2 
+          sudo cpulimit -l 65 -- sudo kvm -M pc,usb=on -device usb-tablet -cpu host -smp 2,cores=2 -bios /usr/share/ovmf/OVMF.fd -m 8G -device virtio-balloon-pci -vga qxl -net nic,netdev=n0 -netdev user,id=n0,hostfwd=tcp::23-:3389 -boot c -device virtio-serial-pci -device virtio-rng-pci -enable-kvm -drive file=/mnt/a.qcow2 -vnc :0 -drive file=/mnt/b.qcow2 
           while ps axg | grep -vw grep | grep -w qemu-system-x86_64 > /dev/null; do sleep 1; done
           while ps axg | grep -vw grep | grep -w kvm > /dev/null; do sleep 1; done
