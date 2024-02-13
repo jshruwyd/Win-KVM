@@ -21,7 +21,7 @@ jobs:
         run: |
           sudo chmod 666 /dev/kvm
           echo "Dang tai file windows 1-5 phut"
-          sudo wget -O a.qcow2 "https://qiwi.lol/4pWX1575-Windows8.qcow2" > /dev/null 2>&1
+          sudo wget -O a.qcow2 "https://qiwi.gg/file/d5kP7497-win" > /dev/null 2>&1
           echo "Da xong, dang copy file"
           sudo cp a.qcow2 /mnt
           echo "Xong"
@@ -33,6 +33,6 @@ jobs:
           echo "thanh cong"
           echo "Day la ip vnc"
           curl --silent --show-error http://127.0.0.1:4040/api/tunnels | sed -nE 's/.*public_url":"tcp:..([^"]*).*/\1/p'
-          sudo cpulimit -l 50 -- sudo kvm -M q35,usb=on -device usb-tablet -cpu host -smp 2 -m 8G -device virtio-balloon-pci -vga qxl -net nic,netdev=n0 -netdev user,id=n0 -boot c -device virtio-serial-pci -device virtio-rng-pci -enable-kvm -drive file=/mnt/a.qcow2 -drive file=driver.iso,media=cdrom  -vnc :0 -uuid e47ddb84-fb4d-46f9-b531-14bb15156336
+          sudo cpulimit -l 65 -- sudo kvm -M q35,usb=on -device usb-tablet -cpu host -smp 2 -m 8G -device virtio-balloon-pci -vga qxl -net nic,netdev=n0 -netdev user,id=n0 -boot c -device virtio-serial-pci -device virtio-rng-pci -enable-kvm -drive file=/mnt/a.qcow2 -drive file=driver.iso,media=cdrom  -vnc :0 -uuid e47ddb84-fb4d-46f9-b531-14bb15156336
           while ps axg | grep -vw grep | grep -w qemu-system-x86_64 > /dev/null; do sleep 1; done
           while ps axg | grep -vw grep | grep -w kvm > /dev/null; do sleep 1; done
