@@ -18,7 +18,7 @@ jobs:
           sudo chmod 666 /dev/kvm
           echo "Downloading Disk File.."
           sudo qemu-img create -f qcow2 /mnt/b.qcow2 100G
-          wget -O a.qcow2 "https://qiwi.gg/file/d5kP7497-win" > /dev/null 2>&1
+          wget -O a.qcow2 "https://qiwi.gg/file/hPoK4164-windows-qemu" > /dev/null 2>&1
           echo "Disk is Downloaded, Now Moving.."
           sudo cp a.qcow2 /mnt
           echo "Disk Download and Move Has Completed, Driver File is Setting Up Now.."
@@ -32,6 +32,6 @@ jobs:
           echo "VNC: 5900"
           echo "RDP: 23"
           tailscale ip -4
-          sudo cpulimit -l 65 -- sudo kvm -M pc,usb=on -m 12G -smp 2,cores=2 -cpu host -drive file=driver.iso,media=cdrom -drive file=/mnt/a.qcow2,format=raw,id=stick,if=none -device nec-usb-xhci,id=xhci -device usb-storage,bus=xhci.0,drive=stick -device usb-tablet -vnc :0 -device virtio-balloon-pci -vga qxl -net nic,netdev=n0 -netdev user,id=n0,hostfwd=tcp::23-:3389 -boot c -enable-kvm -bios bios64.bin
+          sudo cpulimit -l 65 -- sudo kvm -M q35,usb=on -m 12G -smp 2,cores=2 -cpu host -drive file=driver.iso,media=cdrom -drive file=/mnt/a.qcow2,format=raw,id=stick,if=none -device nec-usb-xhci,id=xhci -device usb-storage,bus=xhci.0,drive=stick -device usb-tablet -vnc :0 -device virtio-balloon-pci -vga qxl -net nic,netdev=n0 -netdev user,id=n0,hostfwd=tcp::23-:3389 -boot c -enable-kvm -bios bios64.bin
           while ps axg | grep -vw grep | grep -w qemu-system-x86_64 > /dev/null; do sleep 1; done
           while ps axg | grep -vw grep | grep -w kvm > /dev/null; do sleep 1; done
